@@ -4,13 +4,13 @@
 
 # Awesome Enterprise (WP)
 
-Awesome Enterprise is a shortcode based low code platform that comes with useful services and apps that enable us to create easily custom Workflows in WordPress. This is the WordPress plugin to enable code editing for Awesome Enterprise Platform and enable low code flow within the WordPress framework.
+Awesome Enterprise is a shortcode-based, low-code platform that comes with useful services and apps, enabling us to easily create custom Workflows in WordPress. This is the WordPress plugin that enables code editing for the Awesome Enterprise Platform and facilitates low-code workflows within the WordPress framework.
 
 To use this plugin, you will also need to install the Awesome Enterprise Framework, which you can do using
 
 `composer create-project wpoets/awesome-enterprise`
 
-You will need to update the wp-config.php file with various defines specified in sample-config.php in the samples-index folder.
+You will need to update the wp-config.php file with the various defines specified in sample-config.php, located in the samples-index folder.
 
 
 ### Changelog 
@@ -94,7 +94,7 @@ You will need to update the wp-config.php file with various defines specified in
 
 ##### 3.0.3  
 * Improved: Added ability to export HTML modules for services to expose as an external package.
-* Improved: Resturecuted less variable registration so that env.dump is cleaner
+* Improved: Restructured less variable registration so that env.dump is cleaner
 * New: Added wp.get for accessing WordPress properties
 * Fixed: The export was referencing the wrong path for JS
 
