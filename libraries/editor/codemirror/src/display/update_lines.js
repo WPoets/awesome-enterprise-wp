@@ -1,6 +1,6 @@
 import { heightAtLine } from "../line/spans.js"
 import { getLine, lineAtHeight, updateLineHeight } from "../line/utils_line.js"
-import { paddingTop, textHeight, charWidth } from "../measurement/position_measurement.js"
+import { paddingTop, charWidth } from "../measurement/position_measurement.js"
 import { ie, ie_version } from "../util/browser.js"
 
 // Read the actual heights of the rendered lines, and update their
@@ -8,10 +8,14 @@ import { ie, ie_version } from "../util/browser.js"
 export function updateHeightsInViewport(cm) {
   let display = cm.display
   let prevBottom = display.lineDiv.offsetTop
+  let viewTop = Math.max(0, display.scroller.getBoundingClientRect().top)
+  let oldHeight = display.lineDiv.getBoundingClientRect().top
+  let mustScroll = 0
   for (let i = 0; i < display.view.length; i++) {
     let cur = display.view[i], wrapping = cm.options.lineWrapping
     let height, width = 0
     if (cur.hidden) continue
+    oldHeight += cur.line.height
     if (ie && ie_version < 8) {
       let bot = cur.node.offsetTop + cur.node.offsetHeight
       height = bot - prevBottom
@@ -25,8 +29,8 @@ export function updateHeightsInViewport(cm) {
         width = cur.text.firstChild.getBoundingClientRect().right - box.left - 1
     }
     let diff = cur.line.height - height
-    if (height < 2) height = textHeight(display)
     if (diff > .005 || diff < -.005) {
+      if (oldHeight < viewTop) mustScroll -= diff
       updateLineHeight(cur.line, height)
       updateWidgetHeight(cur.line)
       if (cur.rest) for (let j = 0; j < cur.rest.length; j++)
@@ -41,6 +45,7 @@ export function updateHeightsInViewport(cm) {
       }
     }
   }
+  if (Math.abs(mustScroll) > 2) display.scroller.scrollTop += mustScroll
 }
 
 // Read and store the height of line widgets associated with the
@@ -53,7 +58,7 @@ function updateWidgetHeight(line) {
 }
 
 // Compute the lines that are visible in a given viewport (defaults
-// the the current scroll position). viewport may contain top,
+// the current scroll position). viewport may contain top,
 // height, and ensure (see op.scrollToPos) properties.
 export function visibleLines(display, doc, viewport) {
   let top = viewport && viewport.top != null ? Math.max(0, viewport.top) : display.scroller.scrollTop

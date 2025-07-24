@@ -1,5 +1,5 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
-// Distributed under an MIT license: https://codemirror.net/LICENSE
+// Distributed under an MIT license: https://codemirror.net/5/LICENSE
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
@@ -13,9 +13,15 @@
 
   var defaultTags = {
     script: [
+      ["lang", /(javascript|babel)/i, "javascript"],
+      ["type", /^(?:text|application)\/(?:x-)?(?:java|ecma)script$|^module$|^$/i, "javascript"],
+      ["type", /./, "text/plain"],
       [null, null, "javascript"]
     ],
     style:  [
+      ["lang", /^css$/i, "css"],
+      ["type", /^(text\/)?(x-)?(stylesheet|css)$/i, "css"],
+      ["type", /./, "text/plain"],
       [null, null, "css"]
     ]
   };
@@ -44,7 +50,7 @@
   }
 
   function getTagRegexp(tagName, anchored) {
-    return new RegExp((anchored ? "^" : "") + "<\/\s*" + tagName + "\s*>", "i");
+    return new RegExp((anchored ? "^" : "") + "<\/\\s*" + tagName + "\\s*>", "i");
   }
 
   function addTags(from, to) {
@@ -68,7 +74,8 @@
       name: "xml",
       htmlMode: true,
       multilineTagIndentFactor: parserConfig.multilineTagIndentFactor,
-      multilineTagIndentPastTag: parserConfig.multilineTagIndentPastTag
+      multilineTagIndentPastTag: parserConfig.multilineTagIndentPastTag,
+      allowMissingTagName: parserConfig.allowMissingTagName,
     });
 
     var tags = {};
@@ -99,7 +106,7 @@
           return maybeBackup(stream, endTag, state.localMode.token(stream, state.localState));
         };
         state.localMode = mode;
-        state.localState = CodeMirror.startState(mode/*, htmlMode.indent(state.htmlState, "")*/);
+        state.localState = CodeMirror.startState(mode, htmlMode.indent(state.htmlState, "", ""));
       } else if (state.inTag) {
         state.inTag += stream.current()
         if (stream.eol()) state.inTag += " "
@@ -127,16 +134,15 @@
         return state.token(stream, state);
       },
 
-      /*
       indent: function (state, textAfter, line) {
         if (!state.localMode || /^\s*<\//.test(textAfter))
-          return htmlMode.indent(state.htmlState, textAfter);
+          return htmlMode.indent(state.htmlState, textAfter, line);
         else if (state.localMode.indent)
           return state.localMode.indent(state.localState, textAfter, line);
         else
           return CodeMirror.Pass;
       },
-      */
+
       innerMode: function (state) {
         return {state: state.localState || state.htmlState, mode: state.localMode || htmlMode};
       }
