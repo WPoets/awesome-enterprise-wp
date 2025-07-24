@@ -15,9 +15,14 @@ You will need to update the wp-config.php file with various defines specified in
 
 ### Changelog 
 
+##### 3.2.0
+
+* Improved: Upgraded codemirror to version 5.65.19.
+
+
 ##### 3.1.9
 
-* Fixed: When "dev" role was being assigned to a user, then it was resulting in 500 server error.
+* Fixed: When the "dev" role was being assigned to a user, it resulted in a 500 server error.
 
   
 ##### 3.1.8
