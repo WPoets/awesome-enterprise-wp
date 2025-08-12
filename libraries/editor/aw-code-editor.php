@@ -278,11 +278,12 @@ function awesome_init_codemirror( $post ) {
 			  matchBrackets: true,
 			  viewportMargin: Infinity,
 			  keyMap: "sublime",
-			  foldGutter: true,
-			  
 			  
 			  matchTags: {bothTags: true},
-			autoCloseTags: true,
+				autoCloseTags: true,
+				foldGutter: {
+					rangeFinder: new CodeMirror.fold.combine(CodeMirror.fold.shortcode, CodeMirror.fold.comment,CodeMirror.fold.xml)
+				},
 			  gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
 			  tabSize: 2,
 			  smartIndent: false,
