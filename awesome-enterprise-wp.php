@@ -3,7 +3,7 @@
 Plugin Name: Awesome Enterprise WP
 Plugin URI: http://www.getawesomestudio.com
 Description: Awesome Enterprise is a shortcode-based low-code platform with useful services and apps enabling us to easily create a custom WordPress workflow. 
-Version: 3.2.0
+Version: 3.2.1
 Author: WPoets Team
 Author URI: http://www.wpoets.com
 License: GPLv3 or Later
