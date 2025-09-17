@@ -15,6 +15,10 @@ You will need to update the wp-config.php file with the various defines specifie
 
 ### Changelog 
 
+##### 3.2.1
+
+* Fixed: Code folding was not working properly after upgrading CM.
+
 ##### 3.2.0
 
 * Improved: Upgraded codemirror to version 5.65.19.
