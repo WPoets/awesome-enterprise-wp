@@ -82,6 +82,18 @@ function aw_register_elements_post_type() {
         'filter_items_list'     => __( 'Filter Awesome Elementor Widgets list', 'text_domain' ),
     ];
 
+    $capabilities = array(
+        "edit_post"=>"develop_for_awesomeui",
+        "read_post"=>"develop_for_awesomeui",
+        "delete_post"=>"develop_for_awesomeui",
+        "edit_posts"=>"develop_for_awesomeui",
+        "edit_others_posts"=>"develop_for_awesomeui",
+        "publish_posts"=>"develop_for_awesomeui",
+        "read_private_posts"=>"develop_for_awesomeui",
+        "delete_posts"=>"develop_for_awesomeui"
+        
+    );
+
     $args = [
         'label'               => __( 'Awesome Elementor Widgets', 'text_domain' ),
         'description'         => __( 'Post type for storing Elementor widget configurations.', 'text_domain' ),
@@ -100,12 +112,14 @@ function aw_register_elements_post_type() {
         'exclude_from_search' => true,
         'publicly_queryable'  => false,
         'capability_type'     => 'post',
+        'capabilities'        => $capabilities,
+        'rewrite'             => false,
         'delete_with_user'    => false,
         'show_in_rest'        => false, // Important for Gutenberg or REST API access if needed later
     ];
 
     register_post_type( 'aw_elements', $args );
-
+  
     \aw2_library::add_service('aw_elements','aw_elements service refers to aw_elements posts for rendering etc.',['post_type'=>'aw_elements']);
 
 }
