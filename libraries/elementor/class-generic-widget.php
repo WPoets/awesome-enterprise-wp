@@ -113,19 +113,46 @@ class Elementor_Generic_Widget extends \Elementor\Widget_Base {
     }
 
     protected function content_template(): void {
+        //run service $this->config['controls']
+        if (!empty($this->config['render_service'])) {
+           $this->config['render_html']=\aw2_library::service_run($this->config['render_service'],$settings,null,'service');
+        }
         // Use the defensive 'content_template' logic from the previous fix
         $html_template = $this->config['render_html'] ?? '';
         ?>
         <#
-        var html = <?php echo json_encode($html_template); ?>;
-        const placeholders = html.match(/\{\{(.*?)\}\}/g) || [];
-        placeholders.forEach(function(placeholder) {
-            var key = placeholder.replace(/\{|\}/g, '').trim();
-            if ( settings.hasOwnProperty(key) ) {
-                html = html.replace(new RegExp(placeholder, 'g'), settings[key]);
+         var html = <?php echo json_encode( $html_template ); ?>;
+
+            // This function will be called to replace our custom shortcodes
+            function replaceShortcodes( template ) {
+                // Regex to find all instances of [template.get ... /]
+                return template.replace(
+                    /\[template\.get\s+(.*?)\s*\/?\]/g,
+                    function( match, key ) {
+                        key = key.trim();
+                        // Check if the setting exists and return its value
+                        if ( settings.hasOwnProperty( key ) ) {
+                            return settings[key];
+                        }
+                        return ''; // Return empty string if not found
+                    }
+                );
             }
-        });
-        print(html);
+
+            // Initial render
+            var renderedHtml = replaceShortcodes( html );
+
+            // This part is a bit more advanced: it ensures that when a setting is updated,
+            // the entire template is re-rendered to reflect the change.
+            // We listen to changes on any setting.
+            _.each( settings, function( value, key ) {
+                view.addRenderAttribute( key, 'on', 'change', function() {
+                    var newHtml = replaceShortcodes( html );
+                    view.$el.html( newHtml );
+                } );
+            } );
+
+            print( renderedHtml );
         #>
         <?php
     }
