@@ -15,6 +15,12 @@ You will need to update the wp-config.php file with the various defines specifie
 
 ### Changelog 
 
+##### 3.2.2
+
+* Improved: Added support to create Elementor Widgets, introduced element_widgets.register shortcode and aw_elements service.
+* Improved: Added the ability to create GT blocks without ACF, introduced gt_blocks.register shortcode, and gb_blocks service.
+
+
 ##### 3.2.1
 
 * Fixed: Code folding was not working properly after upgrading CM.
