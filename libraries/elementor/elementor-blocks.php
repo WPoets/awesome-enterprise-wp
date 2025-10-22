@@ -1,9 +1,9 @@
 <?php
 namespace aw2\elementor_widgets;
 
-add_action( 'init', 'aw2\elementor_widgets\aw_register_elements_post_type', 0 );
-add_action('init','aw2\elementor_widgets\setup_elementor_widgets',1);
-add_action( 'elementor/widgets/register', 'aw2\elementor_widgets\register_generic_widgets' );
+\add_action( 'init', 'aw2\elementor_widgets\aw_register_elements_post_type', 0 );
+\add_action('init','aw2\elementor_widgets\setup_elementor_widgets',1);
+\add_action( 'elementor/widgets/register', 'aw2\elementor_widgets\register_generic_widgets' );
 
 function _register_generic_widgets( $widgets_manager ) {
     
@@ -134,7 +134,7 @@ function setup_elementor_widgets(){
    
 	foreach($widget_posts as $widget_post){
         // run the post main service?
-        \aw2_library::service_run('aw_elements.'.$widget_post['module'].'.main',null,null,'service');
+        \aw2_library::service_run('aw_elements.'.$widget_post['module'].'.register',null,null,'service');
     }
    
 }
