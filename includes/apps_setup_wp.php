@@ -119,7 +119,7 @@ class apps_setup_wp{
 		return $post_link;
 	}
 	
-	static function nav_menu_css_class( $classes , $item, $args){
+	static function nav_menu_css_class( $classes , $item, $args=null){
 		//ensures currect classes in menu if app is set
 		$current_app_id=aw2_library::get('app.post_id');
 		
