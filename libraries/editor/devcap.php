@@ -38,6 +38,8 @@ function save_profile_update( $user_id ) {
 		{	
 			update_user_meta( $user->ID, 'develop_for_awesomeui', 'yes');
 			$user->add_cap( "develop_for_awesomeui");
+			$user->add_cap('Nginx Helper | Config');
+			$user->add_cap('Nginx Helper | Purge cache');
 		}
 		return;
 	}
