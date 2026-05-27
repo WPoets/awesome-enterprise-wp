@@ -15,6 +15,13 @@ You will need to update the wp-config.php file with the various defines specifie
 
 ### Changelog 
 
+##### 3.2.3
+
+* Improved: Given the accesd to purge the cache to admin users as well.
+* Improved: nginx helper was asking for additonal cpabilites, added support.
+* Fixed: Uncaught ArgumentCountError: Too few arguments
+
+
 ##### 3.2.2
 
 * Improved: Added support to create Elementor Widgets, introduced element_widgets.register shortcode and aw_elements service.
