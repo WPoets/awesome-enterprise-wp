@@ -15,10 +15,15 @@ You will need to update the wp-config.php file with the various defines specifie
 
 ### Changelog 
 
+##### 3.2.4
+
+* Improved: Added support for ACF Blocks V3 capabilities.
+* Improved: PHP 8.5 compatibility update, new GT blocks fields
+
 ##### 3.2.3
 
-* Improved: Given the accesd to purge the cache to admin users as well.
-* Improved: nginx helper was asking for additonal cpabilites, added support.
+* Improved: Given access to purge the cache to admin users as well.
+* Improved: nginx helper was asking for additional capabilities; added support.
 * Fixed: Uncaught ArgumentCountError: Too few arguments
 
 
