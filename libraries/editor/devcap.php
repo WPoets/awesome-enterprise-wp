@@ -13,7 +13,14 @@ function awesome_cap(){
 	add_filter( 'manage_users_columns', 'awesome\monoframe\editor\manage_users_columns' );
 	add_filter( 'manage_users_custom_column', 'awesome\monoframe\editor\manage_users_custom_column', 10, 3 );
  
-   
+	$editor = get_role('editor');
+	if ($editor && !$editor->has_cap('Nginx Helper | Purge cache')) {
+		$editor->add_cap('Nginx Helper | Purge cache');
+	}
+	$admin = get_role('administrator');
+	if ($admin && !$admin->has_cap('Nginx Helper | Purge cache')) {
+		$admin->add_cap('Nginx Helper | Purge cache');
+	}
 }		
 
 function save_profile_update( $user_id ) {
