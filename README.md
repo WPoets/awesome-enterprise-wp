@@ -1,6 +1,9 @@
 <p align="center">
 	<a href="https://www.wpoets.com/" target="_blank"><img width="200"src="https://www.wpoets.com/wp-content/uploads/2018/05/WPoets-logo-1.svg" alt='Your Web and WordPress Experts'></a>
+
 </p>
+
+This repository will be archived. Please use [Awesome XP](https://github.com/WPoets/awesome-xp) for future projects. 
 
 # Awesome Enterprise (WP)
 
@@ -12,7 +15,7 @@ To use this plugin, you will also need to install the Awesome Enterprise Framewo
 
 You will need to update the wp-config.php file with the various defines specified in sample-config.php, located in the samples-index folder.
 
-
+This repository is archived. 
 ### Changelog 
 
 ##### 3.2.5
