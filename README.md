@@ -15,10 +15,14 @@ You will need to update the wp-config.php file with the various defines specifie
 
 ### Changelog 
 
+##### 3.2.5
+* Improved: Sitemaps now handle hierarchical post types
+* Improved: Allow admin and editor roles to purge cache from menu and admin bar 
+
 ##### 3.2.4
 
 * Improved: Added support for ACF Blocks V3 capabilities.
-* Improved: PHP 8.5 compatibility update, new GT blocks fields
+* Improved: PHP 8.5 compatibility update, new GT block fields
 
 ##### 3.2.3
 
